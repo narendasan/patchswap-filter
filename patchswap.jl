@@ -10,7 +10,7 @@ using Random
 img_path = "input_image.jpg"
 img_ = float.(load(img_path))
 
-# Use this to crop
+# Use this to crop to AoI
 #img_ = @view img_[250:1250, 1000:2000]
 #img_ = @view img_[250:1250, 1:1000]
 
@@ -74,6 +74,13 @@ function build_channel(img, patch_locs, patch_width)
 	return new_img
 end
 
+@doc"""
+img: Input image loaded from JuliaImage
+patch_width: Size of each image patch (px)
+swaprate: Probablity to swap a pair of patches
+rotation: How much to rotate the channels of the image in the final image
+crop_width: Size of resulting image. Image will be center cropped square to the specified size
+"""
 function build_img(img, patch_width, swaprate, rotation, crop_width)
 	#img = HSV.(img)
 	shape = size(img)
